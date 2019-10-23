@@ -347,6 +347,8 @@ try
                     {
                         System.out.println("User validated");
                          System.out.println("Welcome !! "+rs.getString("name"));
+                         home h = new home();
+                         h.setVisible(true);
                          break;
                     }
              }
