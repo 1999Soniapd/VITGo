@@ -301,6 +301,7 @@ public class start extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+       this.setVisible(false);
         NaviPane nj=new NaviPane();
         nj.setVisible(true);
         nj.setLocation(10,10);
@@ -309,6 +310,7 @@ public class start extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.setVisible(false);
         login njf=new login();
         njf.setVisible(true);
         njf.setLocation(10,10);

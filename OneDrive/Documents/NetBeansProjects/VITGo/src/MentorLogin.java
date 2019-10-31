@@ -12,12 +12,12 @@ import javax.swing.*;
  *
  * @author This PC
  */
-public class login extends javax.swing.JFrame {
+public class MentorLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public login() {
+    public MentorLogin() {
         initComponents();
     }
 
@@ -111,7 +111,7 @@ public class login extends javax.swing.JFrame {
         username.setBackground(new java.awt.Color(204, 204, 204));
         username.setFont(new java.awt.Font("Product Sans", 0, 14)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        username.setText("User Id");
+        username.setText("Username");
         username.setToolTipText("");
         username.setBorder(null);
         username.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -186,7 +186,7 @@ public class login extends javax.swing.JFrame {
         });
 
         jLabel5.setForeground(new java.awt.Color(51, 0, 204));
-        jLabel5.setText("Mentor Login");
+        jLabel5.setText("Student Login");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -209,10 +209,10 @@ public class login extends javax.swing.JFrame {
                 .addGap(342, 342, 342)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(338, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(406, 406, 406)
                 .addComponent(jLabel5)
-                .addGap(410, 410, 410))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,9 +223,9 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addGap(32, 32, 32))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,6 +258,56 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameActionPerformed
 Connection conn = null;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// String user=uname.getText();
+//        String pass=(pw.getPassword()).toString();
+//        
+//        if(pass.isEmpty() && user.isEmpty()){
+//            l1.setText("All fields are empty!");
+//        }
+//        else if(user.isEmpty()){
+//            l1.setText("Enter the username.");
+//            uname.setText("");
+//            pw.setText("");
+//        }
+//        else if(pass.isEmpty()){
+//            l1.setText("Enter the password.");
+//            uname.setText("");
+//            pw.setText("");
+//        }
+//        else{
+//            try{
+//                Class.forName("java.sql.DriverManager");
+//                Connection con = (Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/register", "root","Shrey@2048");
+//                Statement stmt = (Statement) con.createStatement();
+//                String query="SELECT * FROM SIGNUP WHERE reg_no='"+user+"' && password='"+pass+"';";
+//                ResultSet rs=stmt.executeQuery(query);
+//                
+//                if(rs.next()){
+//                    JOptionPane.showMessageDialog(this, "Sucessfully Logged in!");
+//                    home njf=new home();
+//                    njf.setVisible(true);
+//                    njf.setLocation(10,10);
+//                    njf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                    this.dispose();
+//                }
+//                else{JOptionPane.showMessageDialog(this, "Sucessfully Logged in!");
+//                    home njf=new home();
+//                    njf.setVisible(true);
+//                    njf.setLocation(10,10);
+//                    njf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                    this.dispose();}
+//                    
+//          
+//                rs.close();
+//                con.close();
+//                
+//              
+//            }
+//            catch(Exception e){
+//                JOptionPane.showMessageDialog(this, e.getMessage());
+//            }
+//        }
+
 try
         {  String driverName = "oracle.jdbc.driver.OracleDriver";        
            Class.forName(driverName);
@@ -279,44 +329,36 @@ try
         String uname = username.getText();
         String pw = pass.getText();
         System.out.println(uname+" "+pw);
-        //String u = "sonia";
+  
         
         try{
              Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from register");
-                   
-           int nc = 0;                  
+            ResultSet rs = st.executeQuery("select * from mentor");
+                            
            try{ 
              while(rs.next())
              {              
-                String u = rs.getString("regno");
-                String p = rs.getString("password");
+                String u = rs.getString("mid");
+                String p = rs.getString("pw");
                 u = u.trim();
                 p = p.trim();
-
                  if(uname.equals(u) && pw.equals(p))
-                    {   nc++;
+                    {
                         System.out.println("User validated");
                          System.out.println("Welcome !! "+rs.getString("name"));
-                         String display2 = "Welcome !! "+rs.getString("name");
-                        // JOptionPane.showMessageDialog(null, "User Validated", display2, JOptionPane.INFORMATION_MESSAGE);
-                         this.setVisible(false);
-                         home h = new home();
+                          this.setVisible(false);
+                         MentorPortal h = new MentorPortal();
                          h.setVisible(true);
-                         h.displayName(rs.getString("name"),rs.getString("regno"));
+                         h.display(rs.getString("name"),rs.getString("regno"));
                          break;
+                         
                     }
-                if(nc>16)
-                 {
-                     JOptionPane.showMessageDialog(null, "Invalid Credentials", "Registration Number not found", JOptionPane.INFORMATION_MESSAGE);
-                     
-                 }
              }
            }catch(Exception e)
            {
                System.out.println("problem with the while loop");
            }
-              
+             
              
              
              
@@ -338,9 +380,9 @@ rd.setVisible(true);
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        MentorLogin ml = new MentorLogin();
+        login l = new login();
         this.setVisible(false);
-        ml.setVisible(true);
+        l.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
